@@ -1,0 +1,22 @@
+using CTEditor.Core;
+
+namespace CToolsEditor.Examples
+{
+    public class Example_$EXAMPLE_NAME$ : UniversalScriptExampleBase
+    {
+        public static ExamplScriptInfo ScriptInfo=
+            new ExamplScriptInfo("$EXAMPLE_NAME$",
+                "$EXAMPLE_CATEGORY$",
+	            "$EXAMPLE_DESCRIPTION$",
+                "$CODE$",
+                "$CODE_PATH$",
+                picPath : "$PIC_PATH$",
+                videoPath : "$VIDEO_PATH$",
+	            typeof(Example_$EXAMPLE_NAME$));
+
+        public override ExamplScriptInfo GetExamplScriptInfo()
+        {
+            return ScriptInfo;
+        }
+    }
+}

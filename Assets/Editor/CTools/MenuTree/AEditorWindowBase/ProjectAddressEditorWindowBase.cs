@@ -43,5 +43,10 @@ namespace CTEditor
         {
             Debug.Log("Current Time:" + DateTime.Now.ToString("HH:mm:ss"));
         }
+        
+        public override void OnEnable()
+        {
+            DrawUI();
+        }
     }
 }

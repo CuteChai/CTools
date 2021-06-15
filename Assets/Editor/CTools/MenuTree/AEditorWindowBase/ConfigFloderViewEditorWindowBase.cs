@@ -47,5 +47,10 @@ namespace CTEditor
         {
             SystemFileFolderHandle.OpenTargetFolder(SystemStaticFile.SystemPersistenDataFolder);
         }
+
+        public override void OnEnable()
+        {
+            DrawUI();
+        }
     }
 }

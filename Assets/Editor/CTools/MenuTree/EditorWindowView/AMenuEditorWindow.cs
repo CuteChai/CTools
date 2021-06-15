@@ -14,6 +14,8 @@ namespace CTEditor
         public List<AEditorWindowBase> aEditorWindowBaseList = new List<AEditorWindowBase>();
 
         private OdinMenuTree odinMenuTree;
+        
+        protected bool m_ShouldDrawExampleCreatorUI;
 
         public OdinMenuTree OdinMenuTree
         {
@@ -44,6 +46,7 @@ namespace CTEditor
 
         public void OnSelectionChange(SelectionChangedType type)
         {
+            m_ShouldDrawExampleCreatorUI = false;
             switch (type)
             {
                 case SelectionChangedType.ItemRemoved:
@@ -51,11 +54,10 @@ namespace CTEditor
                 case SelectionChangedType.ItemAdded:
                     if (OdinMenuTree.Selection.SelectedValue != null)
                     {
-                        if (OdinMenuTree.Selection.SelectedValue.GetType() != typeof(AEditorWindowBase)) return;
+                        if (OdinMenuTree.Selection.SelectedValue.GetType() != typeof(AEditorWindowBase))  return;
                         currentWindow = (AEditorWindowBase) OdinMenuTree.Selection.SelectedValue;
                         currentWindow.OnEnable();
                     }
-
                     break;
                 case SelectionChangedType.SelectionCleared:
                     if (currentWindow != null)
@@ -63,7 +65,6 @@ namespace CTEditor
                         currentWindow.OnDisable();
                         currentWindow = null;
                     }
-
                     break;
             }
         }
