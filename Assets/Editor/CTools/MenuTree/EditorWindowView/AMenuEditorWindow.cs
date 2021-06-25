@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CTEditor.Core;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
@@ -10,6 +11,8 @@ namespace CTEditor
 {
     public abstract class AMenuEditorWindow<T> : OdinMenuEditorWindow where T : EditorWindow
     {
+        protected ScriptExampleItem scriptExampleItem;
+            
         public AEditorWindowBase currentWindow;
         public List<AEditorWindowBase> aEditorWindowBaseList = new List<AEditorWindowBase>();
 
@@ -47,6 +50,13 @@ namespace CTEditor
         public void OnSelectionChange(SelectionChangedType type)
         {
             m_ShouldDrawExampleCreatorUI = false;
+            this.scriptExampleItem = null;
+            if (base.MenuTree.Selection.SelectedValue is Type selectType)
+            {
+                this.scriptExampleItem = CToolsEditorWindowUtilities.GetItemType(selectType);
+                //每次选择的TreeView变化时都要进行Init
+                this.scriptExampleItem.GetExample().Init();
+            }
             switch (type)
             {
                 case SelectionChangedType.ItemRemoved:

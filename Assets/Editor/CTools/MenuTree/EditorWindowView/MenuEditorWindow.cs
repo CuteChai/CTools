@@ -15,6 +15,7 @@ namespace CTEditor
     public class MenuEditorWindow : AMenuEditorWindow<MenuEditorWindow>
     {
         private PropertyTree m_ExamplePropertyTree;
+
         private ExampleTemplate m_ExampleTemplate = new ExampleTemplate();
 
         private Vector2 scrollPosition;
@@ -35,7 +36,7 @@ namespace CTEditor
         protected override OdinMenuTree BuildMenuTree()
         {
             OdinMenuTree.Add("通用工具",new InterfaceDescription("通用工具","<color=yellow>集合项目中的一些常用工具，方面在项目中能快速查询及使用相应的功能。</color>"));
-            OdinMenuTree.Add("常用工具脚本",new InterfaceDescription("常用脚本集合","收集的一些项目常用的脚本代码。"));
+            OdinMenuTree.Add("常用脚本集合",new InterfaceDescription("常用脚本集合","<color=yellow>收集的一些项目常用的脚本代码。</color>"));
             OdinMenuTree.Add("项目设置", Resources.FindObjectsOfTypeAll<PlayerSettings>().FirstOrDefault());
             AddAEditorWindowBase<ProjectAddressEditorWindowBase>();
             AddAEditorWindowBase<ConfigFloderViewEditorWindowBase>();
@@ -78,6 +79,10 @@ namespace CTEditor
             else
             {
                 base.DrawEditors();
+                if (scriptExampleItem!=null)
+                {
+                    scriptExampleItem.Draw();
+                }
             }
 
             GUILayout.EndScrollView();

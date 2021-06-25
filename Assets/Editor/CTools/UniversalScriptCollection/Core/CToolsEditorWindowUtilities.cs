@@ -9,9 +9,11 @@ namespace CTEditor.Core
     {
         private static readonly Dictionary<Type, UniversalScriptExampleBase> allScriptExampleDic = new Dictionary<Type, UniversalScriptExampleBase>();
 
+        private static readonly Dictionary<Type, ScriptExampleItem> allScriptExampleItemDic = new Dictionary<Type, ScriptExampleItem>();
+        
         static CToolsEditorWindowUtilities()
         {
-            Assembly assembly=Assembly.GetAssembly(typeof(CToolsEditorWindowUtilities));
+            Assembly assembly=Assembly.GetAssembly(typeof(CToolsEditorWindowUtilities)); //获取所有代码实例
             Type[] types = assembly.GetTypes();
 
             foreach (var type in types)
@@ -23,6 +25,7 @@ namespace CTEditor.Core
                 }
                 UniversalScriptExampleBase temp = Activator.CreateInstance(type) as UniversalScriptExampleBase;
                 allScriptExampleDic.Add(type,temp);
+                allScriptExampleItemDic.Add(type,new ScriptExampleItem(temp));
             }
         }
         
@@ -57,6 +60,22 @@ namespace CTEditor.Core
             {
                 return aExampleBase;
             }
+            return null;
+        }
+
+        
+        /// <summary>
+        /// 根据类型获取脚本绘制项目
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static ScriptExampleItem GetItemType(Type type)
+        {
+            if (allScriptExampleItemDic.TryGetValue(type,out var scriptExampleItem))
+            {
+                return scriptExampleItem;
+            }
+
             return null;
         }
     }

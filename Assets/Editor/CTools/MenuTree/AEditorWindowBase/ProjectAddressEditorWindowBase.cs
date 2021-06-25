@@ -36,8 +36,9 @@ namespace CTEditor
             Application.OpenURL("https://github.com/CuteChai/CTools.git");
             
         }
-
-        [PropertySpace(340)]
+        
+        //TODO Current Time Move TO MainInterface Bottom
+        [PropertySpace(330)]
         [Button("@\"Current Time: \" + DateTime.Now.ToString(\"HH:mm:ss\")")]
         public void WorldTime()
         {
